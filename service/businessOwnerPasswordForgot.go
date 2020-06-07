@@ -7,8 +7,6 @@ import (
 )
 
 
-
-
 //BindCompanyToBusinessOwner is
 func (*Server) BusinessOwnerPasswordForgot(ctx context.Context, request *pb.BusinessOwnerPasswordForgotRequest) (*pb.BusinessOwnerPasswordForgotResponse, error) {
 	err := mq.BusinessOwnerResetPassword(request.GetBusinessOwnerEmail())

@@ -20,11 +20,12 @@ func main() {
 
 	c := pb.NewBusinessOwnerServiceClient(cc)
 
-	r := pb.BusinessOwnerPasswordForgotRequest{
+	r := pb.ResetBusinessOwnerPasswordRequest{
 		BusinessOwnerEmail: "esbolatovakezhan@gmail.com",
+		BusinessOwnerPassword: "aki",
 	}
 
-	a, err  := c.BusinessOwnerPasswordForgot(context.Background(), &r)
+	a, err  := c.ResetBusinessOwnerPassword(context.Background(), &r)
 	if err != nil {
 		panic(err)
 	}
