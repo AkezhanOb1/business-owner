@@ -6,7 +6,7 @@ WORKDIR /app
 # Here we copy the rest of the source code
 COPY . .
 # And compile the project
-RUN go build './server.go'
+RUN go build './server/server.go'
 #In this last stage, we start from a fresh Alpine image, to reduce the image size and not ship the Go compiler in our production artifacts.
 # Expose port 8080 to the outside world
 EXPOSE 50056
