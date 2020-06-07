@@ -1,11 +1,12 @@
 package main
 
 import (
+	"log"
+	"net"
+
 	pb "github.com/AkezhanOb1/business-owner/api"
 	"github.com/AkezhanOb1/business-owner/config"
 	"google.golang.org/grpc"
-	"log"
-	"net"
 
 	"github.com/AkezhanOb1/business-owner/service"
 )

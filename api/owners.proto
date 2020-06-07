@@ -57,7 +57,26 @@ message GetBusinessOwnerCompaniesResponse {
     repeated BusinessCompany companies = 1;
 }
 
+message ResetBusinessOwnerPasswordRequest {
+    string businessOwnerEmail = 1;
+    string businessOwnerPassword = 2;
+}
+
+message ResetBusinessOwnerPasswordResponse {
+    BusinessOwner BusinessOwner = 1;
+}
+
+message BusinessOwnerPasswordForgotRequest {
+    string businessOwnerEmail = 1;
+}
+
+message BusinessOwnerPasswordForgotResponse {
+    bool success = 1;
+}
+
 service BusinessOwnerService {
+    rpc BusinessOwnerPasswordForgot(BusinessOwnerPasswordForgotRequest) returns (BusinessOwnerPasswordForgotResponse){}
+    rpc ResetBusinessOwnerPassword(ResetBusinessOwnerPasswordRequest) returns (ResetBusinessOwnerPasswordResponse) {}
     rpc GetBusinessOwnerCompanies(GetBusinessOwnerCompaniesRequest) returns (GetBusinessOwnerCompaniesResponse) {}
     rpc CreateBusinessOwner(CreateBusinessOwnerRequest) returns (CreateBusinessOwnerResponse) {}
     rpc BindCompanyToBusinessOwner(BindCompanyToBusinessOwnerRequest) returns (BindCompanyToBusinessOwnerResponse) {}

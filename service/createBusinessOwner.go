@@ -4,9 +4,8 @@ import (
 	"context"
 	pb "github.com/AkezhanOb1/business-owner/api"
 	db "github.com/AkezhanOb1/business-owner/repository"
+	"github.com/AkezhanOb1/business-owner/client/mq"
 )
-
-
 
 
 //CreateBusinessOwner is
@@ -22,10 +21,10 @@ func (s *Server) CreateBusinessOwner(ctx context.Context, request *pb.CreateBusi
 		return nil, err
 	}
 
-	//err = email.BusinessRegistrationEmail(request.GetBusinessOwnerEmail())
-	//if err != nil {
-	//	return nil, err
-	//}
+	err = mq.BusinessRegistrationEmail(request.GetBusinessOwnerEmail())
+	if err != nil {
+		return nil, err
+	}
 
 	bindRequest := &pb.BindCompanyToBusinessOwnerRequest{
 		BusinessOwnerID:      businessOwner.BusinessOwner.GetBusinessOwnerID(),
