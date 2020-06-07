@@ -1,0 +1,65 @@
+syntax="proto3";
+
+package businessOwners;
+option go_package=".;owners";
+
+
+message BusinessOwner {
+    int64 businessOwnerID = 1;
+    string businessOwnerName = 2;
+    string businessOwnerEmail = 3;
+    string businessOwnerPhoneNumberPrefix = 4;
+    string businessOwnerPhoneNumber = 5;
+}
+
+message CreateBusinessOwnerRequest {
+    string businessOwnerName = 1;
+    string businessOwnerEmail = 2;
+    string businessOwnerPassword = 3;
+    string businessOwnerPhoneNumberPrefix = 4;
+    string businessOwnerPhoneNumber = 5;
+    int64 businessCompanyID = 6;
+}
+
+message CreateBusinessOwnerResponse {
+    BusinessOwner BusinessOwner = 1;
+}
+
+message BindCompanyToBusinessOwnerRequest {
+    int64 businessOwnerID = 1;
+    int64 businessCompanyID = 2;
+}
+
+message BindCompanyToBusinessOwnerResponse{
+    bool BindSuccess = 1;
+}
+
+message CheckOwnerPasswordRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message CheckOwnerPasswordResponse {
+    bool valid = 1;
+}
+
+message GetBusinessOwnerCompaniesRequest {
+    string email = 1;
+}
+
+message BusinessCompany {
+    int64 businessCompanyID = 1;
+    int64 businessCompanyCategoryID = 2;
+    string businessCompanyName = 3;
+}
+
+message GetBusinessOwnerCompaniesResponse {
+    repeated BusinessCompany companies = 1;
+}
+
+service BusinessOwnerService {
+    rpc GetBusinessOwnerCompanies(GetBusinessOwnerCompaniesRequest) returns (GetBusinessOwnerCompaniesResponse) {}
+    rpc CreateBusinessOwner(CreateBusinessOwnerRequest) returns (CreateBusinessOwnerResponse) {}
+    rpc BindCompanyToBusinessOwner(BindCompanyToBusinessOwnerRequest) returns (BindCompanyToBusinessOwnerResponse) {}
+    rpc CheckOwnerPassword(CheckOwnerPasswordRequest) returns (CheckOwnerPasswordResponse) {}
+}
